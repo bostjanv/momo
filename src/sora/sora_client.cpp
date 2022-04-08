@@ -194,9 +194,13 @@ void SoraClient::OnConnect(boost::system::error_code ec,
     return;
   }
 
+  auto remote_endpoint = ws->NativeSocket().next_layer().remote_endpoint();
+  auto remote_address = remote_endpoint.address();
+
   ws_ = ws;
   connected_signaling_url_ = url;
-  RTC_LOG(LS_INFO) << "connected: url=" << url;
+  RTC_LOG(LS_INFO) << "connected: url=" << url
+                   << ", address=" << remote_address.to_string(ec);
 
   DoRead();
   DoSendConnect(false);
