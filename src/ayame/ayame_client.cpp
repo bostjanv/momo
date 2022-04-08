@@ -119,7 +119,11 @@ void AyameClient::DoRead() {
 void AyameClient::DoRegister() {
   boost::json::value json_message = {
       {"type", "register"},
+#ifdef __linux__
+      {"clientId", Util::GetHostname()},
+#else
       {"clientId", Util::GenerateRandomChars()},
+#endif
       {"roomId", config_.room_id},
       {"ayameClient", MomoVersion::GetClientName()},
       {"libwebrtc", MomoVersion::GetLibwebrtcName()},

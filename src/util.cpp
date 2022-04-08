@@ -16,6 +16,10 @@
 // WebRTC
 #include <rtc_base/helpers.h>
 
+#ifdef __linux__
+#include <unistd.h>
+#endif
+
 #include "momo_version.h"
 
 void Util::ParseArgs(int argc,
@@ -498,6 +502,16 @@ void Util::ShowVideoCodecs(VideoCodecInfo info) {
   list_codecs(info.h264_encoders);
   std::cout << "  Decoder:" << std::endl;
   list_codecs(info.h264_decoders);
+}
+
+std::string Util::GetHostname() {
+#ifdef __linux__
+    char name[256];
+    gethostname(name, 256);
+    return name;
+#else
+    return "not implemented";
+#endif
 }
 
 std::string Util::GenerateRandomChars() {

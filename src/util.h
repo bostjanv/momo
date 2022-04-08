@@ -19,6 +19,7 @@ class Util {
                         bool& use_sora,
                         int& log_level,
                         MomoArgs& args);
+  static std::string GetHostname();
   static std::string GenerateRandomChars();
   static std::string GenerateRandomChars(size_t length);
   static std::string GenerateRandomNumericChars(size_t length);
