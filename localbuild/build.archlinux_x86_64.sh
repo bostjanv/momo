@@ -155,6 +155,7 @@ pushd $BUILD_DIR/momo
     -DCMAKE_C_COMPILER=clang \
     -DCMAKE_CXX_COMPILER=clang++ \
     -DUSE_LIBCXX=ON \
+    -DCMAKE_EXPORT_COMPILE_COMMANDS=ON \
     $PROJECT_DIR
 
   # Temporary hack
