@@ -12,6 +12,7 @@
 #include <boost/json.hpp>
 #include <boost/optional/optional_io.hpp>
 #include <boost/preprocessor/stringize.hpp>
+#include <boost/asio/ip/host_name.hpp>
 
 // WebRTC
 #include <rtc_base/helpers.h>
@@ -505,13 +506,7 @@ void Util::ShowVideoCodecs(VideoCodecInfo info) {
 }
 
 std::string Util::GetHostname() {
-#ifdef __linux__
-    char name[256];
-    gethostname(name, 256);
-    return name;
-#else
-    return "not implemented";
-#endif
+  return boost::asio::ip::host_name();
 }
 
 std::string Util::GenerateRandomChars() {
