@@ -64,6 +64,13 @@ void SoraSession::OnRead(boost::system::error_code ec,
     }
   } else if (req_.method() == boost::beast::http::verb::post) {
     if (req_.target() == "/connect") {
+      boost::json::error_code ec;
+      boost::json::value recv_json = boost::json::parse(req_.body(), ec);
+      if (!ec) {
+        auto client_id = recv_json.at("client_id").as_string();
+        RTC_LOG(LS_INFO) << __FUNCTION__ << "client_id: " << client_id;
+      }
+
       client_->Connect();
       boost::json::value json_message = {{"result", true}};
       SendResponse(CreateOKWithJSON(req_, std::move(json_message)));

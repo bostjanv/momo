@@ -271,6 +271,7 @@ void SoraClient::DoSendConnect(bool redirect) {
       {"type", "connect"},
       {"role", config_.role},
       {"channel_id", config_.channel_id},
+      {"client_id", Util::GetHostname()},
       {"sora_client", MomoVersion::GetClientName()},
       {"libwebrtc", MomoVersion::GetLibwebrtcName()},
       {"environment", MomoVersion::GetEnvironmentName()},
